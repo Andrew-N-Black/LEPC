@@ -1,3 +1,5 @@
+#Convert to ped/map
+plink --tfile out_roh --recode --allow-extra-chr --out C.japonica
 
 plink-1.9 --ped SNPs_20x_auto.ped --map SNPs_20x_auto.map --allow-extra-chr --homozyg-snp 20 \
 --homozyg-kb 1 --homozyg-window-het 1 --homozyg-window-snp 20 \
