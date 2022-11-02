@@ -1,5 +1,5 @@
 library(readxl)
-metadata <- read_excel("Library/CloudStorage/Box-Box/Personal/Postdoc_Purdue/LEPC/analysis/metadata.xlsx")
+metadata <- read.csv("/Users/andrew/Library/CloudStorage/Box-Box/Personal/Postdoc_Purdue/LEPC/analysis/metadata.csv")
 View(metadata)                              
 library(ggplot2)
 cov<-as.matrix(read.table("scaf_22_pca.cov"))
