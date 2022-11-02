@@ -1,3 +1,4 @@
+library(readxl)
 library(ggplot2)
 bird_het <- read_excel("Library/CloudStorage/Box-Box/Personal/Postdoc_Purdue/LEPC/analysis/bird_het.xlsx")
 ggplot(bird_het,aes(x=reorder(`Organism Name`,Corrected_HET),y=Corrected_HET)) + 
