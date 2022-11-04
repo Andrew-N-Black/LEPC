@@ -18,9 +18,24 @@ ggplot(data=depth_breadth, aes(y=filt.d, x=reorder(ID,filt.d),fill=HABITAT))+
 
 ggsave("cov.svg")
 
+#Plotting Breadth
+ggplot(data=depth_breadth, aes(y=filt.b, x=reorder(ID,filt.b),fill=HABITAT))+  geom_bar(stat="identity")+scale_fill_manual(title1, values =c("Shinnery-Oak-Prairie"="bisque","Mixed-Grass-Prairie"="blue","Sand-Sagebrush-Prairie"="darkorchid1","Shortgrass-CRP-Mosaic"="darkolivegreen3"))+ylab("Breadth (1x)")+xlab("Bird")+theme(axis.title.x=element_blank(), axis.text.x=element_blank(), axis.ticks.x=element_blank())
+
+ggsave("breadth.svg")
 #Mapping rate
 ggplot(data=depth_breadth, aes(y=map, x=reorder(ID,map),fill=HABITAT))+
 +     geom_bar(stat="identity")+scale_fill_manual(title1, values =c("Shinnery-Oak-Prairie"="bisque","Mixed-Grass-Prairie"="blue","Sand-Sagebrush-Prairie"="darkorchid1","Shortgrass-CRP-Mosaic"="darkolivegreen3"))+ylab("Reads Aligned (%)")+xlab("Bird")+theme(axis.title.x=element_blank(), axis.text.x=element_blank(), axis.ticks.x=element_blank())
 
 ggsave("mapping.svg")
+
+
+#Subet length of scaffolds and plot
+length_scaff <- read_excel("Library/CloudStorage/Box-Box/Personal/Postdoc_Purdue/LEPC/analysis/length_scaff.xlsx")
+new<-subset(length_scaff,lepc_length > 100000,select=c(lepc_seq,lepc_length))
+
+ggplot(data=new, aes(y=lepc_length, x=reorder(lepc_seq,lepc_length)))+
++     geom_bar(stat="identity")+theme_classic()+ylab("Reads Aligned (%)")+xlab("Bird")+theme(axis.title.x=element_blank(), axis.text.x=element_blank(), axis.ticks.x=element_blank())
+
+
+
 
