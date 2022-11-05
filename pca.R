@@ -5,7 +5,7 @@ library(ggplot2)
 cov<-as.matrix(read.table("scaf_22_pca.cov"))
 axes<-eigen(cov)
 axes$values/sum(axes$values)*100
-  #[1] 3.75029565 1.06489268 1.02318401
+  [1] 3.81590616 1.04967471 0.94312197 0.78195581 0.76650334
 
 title1<-"Habitat"
 title2<-"Species"
