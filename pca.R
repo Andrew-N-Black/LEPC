@@ -7,6 +7,7 @@ axes<-eigen(cov)
 axes$values/sum(axes$values)*100
   [1] 3.81590616 1.04967471 0.94312197 0.78195581 0.76650334
 
+PC1_3<-as.data.frame(axes$vectors[,1:3])
 title1<-"Habitat"
 title2<-"Species"
 
