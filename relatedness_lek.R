@@ -12,3 +12,6 @@ library(ggplot2)
 kin<-read_xlsx("scaffold1-results_TRUE.xlsx")
 kin$KIN <- factor(kin$KIN, names(sort(table(kin$KIN), decreasing = TRUE)))
 ggplot(data =df, aes(forcats::fct_infreq(LEK_A)))+geom_bar(aes(fill=KIN))+coord_flip()+xlab("")+ylab("Pairwise Comparisons")+theme_classic()+coord_flip()+ theme(axis.text = element_text(size = 4)) +xlab("Lek")+scale_fill_manual(title, values =c("DUPLICATE"="bisque","PO"="blue","HS"="darkorchid1","FC"="darkolivegreen3","UR"="black"))
+
+#Or kinship based upon ecotype
+ggplot(data =df, aes(forcats::fct_infreq(HABITAT_A)))+geom_bar(aes(fill=KIN))+coord_flip()+xlab("")+ylab("Pairwise Comparisons")+theme_classic()+coord_flip()+ theme(axis.text = element_text(size = 10)) +xlab("Ecotype")+scale_fill_manual(title, values =c("DUPLICATE"="bisque","PO"="blue","HS"="darkorchid1","FC"="darkolivegreen3","UR"="black"))
