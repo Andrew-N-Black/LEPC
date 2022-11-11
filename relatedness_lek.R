@@ -3,3 +3,4 @@ library(readxl)
 lek_kinship <- read_excel("Library/CloudStorage/Box-Box/Personal/Postdoc_Purdue/LEPC/analysis/lek_kinship.xlsx")
 lek_kinship$GROUP<-factor(lek_kinship$GROUP,levels = c("Within","Between"))
 ggplot(lek_kinship, aes(GROUP, COUNT))+geom_bar(aes(fill = GROUP), position = "dodge", stat="identity")+facet_wrap(~KINSHIP,scales = "free_y",ncol = 5)+scale_fill_manual("Lek", values =c("Within"="black","Between"="blue"))+xlab("")+ylab("Pairwise Comparisons")+theme_classic()+ theme(axis.text = element_text(size = 6)) +xlab("Lek")+theme(axis.title.x=element_blank(),axis.text.x=element_blank(),axis.ticks.x=element_blank())
+
