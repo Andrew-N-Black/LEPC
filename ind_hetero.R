@@ -3,13 +3,15 @@ library(readxl)
 library(ggpubr)
 library(dplyr)
 
-partial_HET <- read_excel("~/Library/CloudStorage/Box-Box/Personal/Postdoc_Purdue/LEPC/analysis/partial_HET.xlsx")
+HET_FILT <- read.csv("~/Library/CloudStorage/Box-Box/Personal/Postdoc_Purdue/LEPC/analysis/HET_FILT.csv")
 
 #Heterozygosity by Habitat
-ggplot(partial_HET,aes(x=HABITAT,y=HET,fill=HABITAT))+geom_boxplot(show.legend =FALSE)+scale_fill_manual(title, values =c("Shinnery-Oak-Prairie"="bisque","Mixed-Grass-Prairie"="blue","Sand-Sagebrush-Prairie"="darkorchid1","Shortgrass-CRP-Mosaic"="darkolivegreen3"))+xlab("")+ylab("Individual Heterozygosity")+theme_classic()+coord_flip()+ylim(c(0,0.006))
+ggplot(HET_FILT,aes(x=HABITAT,y=HET,fill=HABITAT))+geom_boxplot(show.legend =FALSE)+scale_fill_manual(title, values =c("Shinnery-Oak-Prairie"="bisque","Mixed-Grass-Prairie"="blue","Sand-Sagebrush-Prairie"="darkorchid1","Shortgrass-CRP-Mosaic"="darkolivegreen3"))+xlab("")+ylab("Individual Heterozygosity")+theme_classic()+coord_flip()+ylim(c(0,0.006))
+ggsave("heterozygosity_habitat.svg")
+ggsave("heterozygosity_habitat.pdf")
 
 #Heterozygosity by LEK and Habitat
-ggplot(partial_HET,aes(x=LEK,y=HET,fill=HABITAT))+geom_boxplot(show.legend =FALSE)+scale_fill_manual(title, values =c("Shinnery-Oak-Prairie"="bisque","Mixed-Grass-Prairie"="blue","Sand-Sagebrush-Prairie"="darkorchid1","Shortgrass-CRP-Mosaic"=""darkolivegreen3""))+xlab("")+ylab("Individual Heterozygosity")+theme_classic()+coord_flip()+ylim(c(0,0.006))+ theme(axis.text = element_text(size = 6)) +xlab("Lek")
+ggplot(HET_FILT,aes(x=LEK,y=HET,fill=HABITAT))+geom_boxplot(show.legend =FALSE)+scale_fill_manual(title, values =c("Shinnery-Oak-Prairie"="bisque","Mixed-Grass-Prairie"="blue","Sand-Sagebrush-Prairie"="darkorchid1","Shortgrass-CRP-Mosaic"=""darkolivegreen3""))+xlab("")+ylab("Individual Heterozygosity")+theme_classic()+coord_flip()+ylim(c(0,0.006))+ theme(axis.text = element_text(size = 6)) +xlab("Lek")
 
 
 ggqqplot(partial_HET$HET)
