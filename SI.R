@@ -8,10 +8,12 @@ new<-subset(length_scaff,lepc_length > 100000,select=c(lepc_seq,lepc_length))
 
 ggplot(data=new, aes(y=lepc_length, x=reorder(lepc_seq,lepc_length)))+geom_bar(stat="identity")+theme_classic()+ylab("Length")+xlab("Scaffold")+theme(axis.text.y=element_blank(), axis.ticks.y=element_blank())+coord_flip()
 ggsave("S1a.svg")
+ggsave("S1a.pdf")
 
 #Mapping rate
 ggplot(data=depth_breadth, aes(y=map, x=reorder(ID,map),fill=HABITAT))+geom_bar(stat="identity")+scale_fill_manual(title1, values =c("Shinnery-Oak-Prairie"="bisque","Mixed-Grass-Prairie"="blue","Sand-Sagebrush-Prairie"="darkorchid1","Shortgrass-CRP-Mosaic"="darkolivegreen3"))+xlab("Sample (N=420)")+ylab("Reads Aligned (% properly paired)")+theme( axis.ticks.y=element_blank(),axis.text.y = element_blank())+coord_flip()+ylim(c(0,100))
 ggsave("S1b.svg")
+ggsave("S1b.pdf")
 
 
 #Plotting Depth:
@@ -20,10 +22,12 @@ depth_breadth <- read_excel("~/Library/CloudStorage/Box-Box/Personal/Postdoc_Pur
 ggplot(data=depth_breadth, aes(y=filt.d, x=reorder(ID,filt.d),fill=HABITAT))+ geom_bar(stat="identity")+scale_fill_manual(title1, values =c("Shinnery-Oak-Prairie"="bisque","Mixed-Grass-Prairie"="blue","Sand-Sagebrush-Prairie"="darkorchid1","Shortgrass-CRP-Mosaic"="darkolivegreen3"))+xlab("Sample (N=420)")+ylab("Coverage")+theme( axis.ticks.y=element_blank(),axis.text.y = element_blank())+coord_flip()
 
 ggsave("S1c.svg")
+ggsave("S1c.pdf")
 
 #Plotting Breadth
 ggplot(data=depth_breadth, aes(y=filt.b, x=reorder(ID,filt.b),fill=HABITAT))+  geom_bar(stat="identity")+scale_fill_manual(title1, values =c("Shinnery-Oak-Prairie"="bisque","Mixed-Grass-Prairie"="blue","Sand-Sagebrush-Prairie"="darkorchid1","Shortgrass-CRP-Mosaic"="darkolivegreen3"))+xlab("Sample (N=420)")+ylab("Breadth")+theme( axis.ticks.y=element_blank(),axis.text.y = element_blank())+coord_flip()+ylim(c(0,100))
 ggsave("S1d.svg")
+ggsave("S1d.pdf")
 
 #Plotting global depth
 all_LEPC_depthGlobal <- read_excel("all_LEPC_depthGlobal_4k.xls")
