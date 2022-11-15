@@ -11,19 +11,22 @@ ggsave("heterozygosity_habitat.svg")
 ggsave("heterozygosity_habitat.pdf")
 
 #Heterozygosity by LEK and Habitat
-ggplot(HET_FILT,aes(x=LEK,y=HET,fill=HABITAT))+geom_boxplot(show.legend =FALSE)+scale_fill_manual(title, values =c("Shinnery-Oak-Prairie"="bisque","Mixed-Grass-Prairie"="blue","Sand-Sagebrush-Prairie"="darkorchid1","Shortgrass-CRP-Mosaic"=""darkolivegreen3""))+xlab("")+ylab("Individual Heterozygosity")+theme_classic()+coord_flip()+ylim(c(0,0.006))+ theme(axis.text = element_text(size = 6)) +xlab("Lek")
+
+ggplot(HET_FILT,aes(x=reorder(LEK,HET),y=HET,fill=HABITAT))+geom_boxplot(outlier.shape = NA)+scale_fill_manual(title, values =c("Shinnery-Oak-Prairie"="bisque","Mixed-Grass-Prairie"="blue","Sand-Sagebrush-Prairie"="darkorchid1","Shortgrass-CRP-Mosaic"="darkolivegreen3"))+xlab("Lek")+ylab("Individual Heterozygosity")+theme_classic()+ylim(0.0018,0.0058)+ theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+
+
 
 
 ggqqplot(partial_HET$HET)
 
 #Set as factor
-partial_HET$HABITAT<-factor(partial_HET$HABITAT,levels = c("Shinnery-Oak-Prairie","Mixed-Grass-Prairie","Sand-Sagebrush-Prairie","Shortgrass-CRP-Mosaic"))
+HET_FILT$HABITAT<-factor(HET_FILT$HABITAT,levels = c("Shinnery-Oak-Prairie","Mixed-Grass-Prairie","Sand-Sagebrush-Prairie","Shortgrass-CRP-Mosaic"))
 
 #Order group
-partial_HET$HABITAT <- ordered(partial_HET$HABITAT,levels = c("Shinnery-Oak-Prairie","Mixed-Grass-Prairie","Sand-Sagebrush-Prairie","Shortgrass-CRP-Mosaic"))
+HET_FILT$HABITAT <- ordered(HET_FILT$HABITAT,levels = c("Shinnery-Oak-Prairie","Mixed-Grass-Prairie","Sand-Sagebrush-Prairie","Shortgrass-CRP-Mosaic"))
 
 
-group_by(partial_HET, HABITAT) %>%
+group_by(HET_FILT, HABITAT) %>%
     summarise(
         count = n(),
         mean = mean(HET, na.rm = TRUE),
@@ -32,26 +35,25 @@ group_by(partial_HET, HABITAT) %>%
         IQR = IQR(HET, na.rm = TRUE)
     )
     
-kruskal.test(HET ~ HABITAT, data = partial_HET)
+kruskal.test(HET ~ HABITAT, data = HET_FILT)
 
 
     	Kruskal-Wallis rank sum test
 
 data:  HET by HABITAT
-Kruskal-Wallis chi-squared = 168.95, df = 3, p-value < 2.2e-16
+Kruskal-Wallis chi-squared = 190.12, df = 3, p-value < 2.2e-16
 
 
-
-pairwise.wilcox.test(partial_HET$HET, partial_HET$HABITAT,
-+                      p.adjust.method = "BH")
+#REMOVE TWO OUTLIERS??
+pairwise.wilcox.test(HET_FILT$HET, HET_FILT$HABITAT, p.adjust.method = "BH")
 
 	Pairwise comparisons using Wilcoxon rank sum test with continuity correction 
 
-data:  partial_HET$HET and partial_HET$HABITAT 
+data:  HET_FILT$HET and HET_FILT$HABITAT 
 
                        Shinnery-Oak-Prairie Mixed-Grass-Prairie Sand-Sagebrush-Prairie
-Mixed-Grass-Prairie    <2e-16               -                   -                     
-Sand-Sagebrush-Prairie 0.0024               0.2486              -                     
-Shortgrass-CRP-Mosaic  <2e-16               0.1262              0.0691                
+Mixed-Grass-Prairie    < 2e-16              -                   -                     
+Sand-Sagebrush-Prairie 0.00096              0.09274             -                     
+Shortgrass-CRP-Mosaic  < 2e-16              0.03366             0.03366               
 
 P value adjustment method: BH 
