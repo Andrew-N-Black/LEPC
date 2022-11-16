@@ -14,19 +14,22 @@ ggsave("heterozygosity_habitat.pdf")
 
 ggplot(HET_FILT,aes(x=reorder(LEK,HET),y=HET,fill=HABITAT))+geom_boxplot(outlier.shape = NA)+scale_fill_manual(title, values =c("Shinnery-Oak-Prairie"="bisque","Mixed-Grass-Prairie"="blue","Sand-Sagebrush-Prairie"="darkorchid1","Shortgrass-CRP-Mosaic"="darkolivegreen3"))+xlab("Lek")+ylab("Individual Heterozygosity")+theme_classic()+ylim(0.0018,0.0058)+ theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
 
+#Remove two outliers with het ~0.01
+HET_FILT_no_out <- read_excel("HET_FILT_no.out.xlsx")
 
-
-
-ggqqplot(partial_HET$HET)
+#Test for normality
+ggqqplot(HET_FILT_no_out$HET,ylab = "Individual Heterozygosity (N=418)")
+shapiro.test(HET_FILT_no_out$HET)
+data:  HET_FILT_no_out$HET
+W = 0.79204, p-value < 2.2e-16
 
 #Set as factor
-HET_FILT$HABITAT<-factor(HET_FILT$HABITAT,levels = c("Shinnery-Oak-Prairie","Mixed-Grass-Prairie","Sand-Sagebrush-Prairie","Shortgrass-CRP-Mosaic"))
+HET_FILT_no_out$HABITAT_<-factor(HET_FILT_no_out$HABITAT,levels = c("Shinnery-Oak-Prairie","Mixed-Grass-Prairie","Sand-Sagebrush-Prairie","Shortgrass-CRP-Mosaic"))
 
 #Order group
-HET_FILT$HABITAT <- ordered(HET_FILT$HABITAT,levels = c("Shinnery-Oak-Prairie","Mixed-Grass-Prairie","Sand-Sagebrush-Prairie","Shortgrass-CRP-Mosaic"))
+HET_FILT_no_out$HABITAT <- ordered(HET_FILT_no_out$HABITAT,levels = c("Shinnery-Oak-Prairie","Mixed-Grass-Prairie","Sand-Sagebrush-Prairie","Shortgrass-CRP-Mosaic"))
 
-
-group_by(HET_FILT, HABITAT) %>%
+group_by(HET_FILT_no_out, HABITAT) %>%
     summarise(
         count = n(),
         mean = mean(HET, na.rm = TRUE),
@@ -35,25 +38,25 @@ group_by(HET_FILT, HABITAT) %>%
         IQR = IQR(HET, na.rm = TRUE)
     )
     
-kruskal.test(HET ~ HABITAT, data = HET_FILT)
+kruskal.test(HET ~ HABITAT, data = HET_FILT_no_out)
 
-
-    	Kruskal-Wallis rank sum test
+	Kruskal-Wallis rank sum test
 
 data:  HET by HABITAT
-Kruskal-Wallis chi-squared = 190.12, df = 3, p-value < 2.2e-16
+Kruskal-Wallis chi-squared = 199.61, df = 3, p-value < 2.2e-16
 
 
 #REMOVE TWO OUTLIERS??
-pairwise.wilcox.test(HET_FILT$HET, HET_FILT$HABITAT, p.adjust.method = "BH")
+pairwise.wilcox.test(HET_FILT_no_out$HET, HET_FILT_no_out$HABITAT, p.adjust.method = "BH")
+	
+Pairwise comparisons using Wilcoxon rank sum test with continuity correction 
 
-	Pairwise comparisons using Wilcoxon rank sum test with continuity correction 
-
-data:  HET_FILT$HET and HET_FILT$HABITAT 
+data:  HET_FILT_no_out$HET and HET_FILT_no_out$HABITAT 
 
                        Shinnery-Oak-Prairie Mixed-Grass-Prairie Sand-Sagebrush-Prairie
 Mixed-Grass-Prairie    < 2e-16              -                   -                     
-Sand-Sagebrush-Prairie 0.00096              0.09274             -                     
+Sand-Sagebrush-Prairie 0.00064              0.09274             -                     
 Shortgrass-CRP-Mosaic  < 2e-16              0.03366             0.03366               
 
 P value adjustment method: BH 
+
