@@ -17,6 +17,10 @@ ls -1 *results.txt | cut -d "_" -f 1 > samps
 #create file for figure
 paste samps 100kb 1MB > ind_roh.txt
 
+#FOR GROUP ROHs
+for i in `cat short`; do  grep $i ROH_RG_all.txt >> short.ROH.txt ; done
+#Edit parser for sample size
+python ROHparser.py > sand.ROH.txt
 
 
 
