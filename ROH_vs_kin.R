@@ -8,3 +8,5 @@ ID_A<-cbind(idaa,top6_results1$KIN)
 ID_A<-cbind(idaa,top6_results1$KIN,top6_results1$HABITAT_A)
 ID_B<-cbind(idab,top6_results1$KIN,top6_results1$HABITAT_B)
  
+ggplot(data = roh_kin,aes(x =KB, y =MB)) +  geom_point(aes(col = KIN),alpha=0.5)+scale_color_manual("Kinship", values =c("bisque","blue","darkorchid1","darkolivegreen3","grey"))+theme_classic()
+
