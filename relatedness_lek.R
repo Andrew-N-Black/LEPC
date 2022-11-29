@@ -13,7 +13,7 @@ ggplot(lek_kinship, aes(GROUP, COUNT))+geom_bar(aes(fill = GROUP), position = "d
 
 #kinship based upon ecotype
 kin <- read_excel("top6_results1_habitat_match.xlsx")
-ggplot(data =kin, aes(forcats::fct_infreq(HABITAT_B)))+geom_bar(aes(fill=KIN))+xlab("")+ylab("Pairwise Comparisons")+theme_classic()+coord_flip()+ theme(axis.text = element_text(size = 10)) +xlab("")+scale_fill_manual("Kinship", values =c("Duplicates"="bisque","Parent-Offspring"="blue","Half-Siblings"="darkorchid1","Full-Cousins"="darkolivegreen3","Unrelated"="black"))
+ggplot(data =kin, aes(forcats::fct_infreq(HABITAT_B)))+geom_bar(aes(fill=KIN),position="fill")+xlab("")+ylab("Pairwise Comparisons")+theme_classic()+coord_flip()+ theme(axis.text = element_text(size = 10)) +xlab("")+scale_fill_manual("Kinship", values =c("Duplicates"="bisque","Parent-Offspring"="blue","Half-Siblings"="darkorchid1","Full-Cousins"="darkolivegreen3","Unrelated"="black"))
 ggsave("kin.svg")
 ggsave("kin.pdf")
 #Can change the order of the kinship factor and use as input for above if needed
