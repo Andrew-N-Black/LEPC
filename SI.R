@@ -11,6 +11,8 @@ ggsave("S1a.svg")
 ggsave("S1a.pdf")
 
 #Mapping rate
+depth_breadth <- read_excel("~/Library/CloudStorage/Box-Box/Personal/Postdoc_Purdue/LEPC/analysis/depth_breadth_filt.xlsx")
+
 ggplot(data=depth_breadth, aes(y=map, x=reorder(ID,map),fill=HABITAT))+geom_bar(stat="identity")+scale_fill_manual(title1, values =c("Shinnery-Oak-Prairie"="bisque","Mixed-Grass-Prairie"="blue","Sand-Sagebrush-Prairie"="darkorchid1","Shortgrass-CRP-Mosaic"="darkolivegreen3"))+xlab("Sample (N=420)")+ylab("Reads Aligned (% properly paired)")+theme( axis.ticks.y=element_blank(),axis.text.y = element_blank())+coord_flip()+ylim(c(0,100))
 ggsave("S1b.svg")
 ggsave("S1b.pdf")
