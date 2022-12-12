@@ -2,7 +2,8 @@ library(ggplot2)
 library(readxl)
 top6_results1 <- read_excel("top6_results1.xlsx")
 #Out of context, but saved to show how to match metadata info to pairwise relatedness workshop.
-idaB<-metadata[match(top6_results1$idb,F_Catalog_18October2022$`F-number`),]
+idaA<-F_Catalog_18October2022[match(top6_results1$ida,F_Catalog_18October2022$`F-number`),]
+idaB<-F_Catalog_18October2022[match(top6_results1$idb,F_Catalog_18October2022$`F-number`),]
 
 ggplot(top6_results1,aes(x = KING, y = R0,group = KIN)) +
     geom_point(aes(col = KIN))+scale_color_manual("Kinship", values =c("Duplicates"="bisque","Parent-Offspring"="blue","Half-Siblings"="darkorchid1","Full-Cousins"="darkolivegreen3","Unrelated"="black"))+theme_classic2()
