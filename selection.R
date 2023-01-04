@@ -30,8 +30,36 @@ echo "BP" > bp
  
 PC1<-z[ , c("V1", "X1","BP","V1.1")]
 names(PC1)<-c("SNP", "P","CHR","BP")
+ggplot(PC1,aes(x=SNP,y=-log10(P)))+geom_scattermore()+theme(axis.title.x=element_blank(),axis.text.x=element_blank(),axis.ticks.x=element_blank())+ggtitle("PC1")
 
-ggplot(PC1,aes(x=SNP,y=-log10(P)))+geom_scattermore()+theme(axis.title.x=element_blank(),axis.text.x=element_blank(),axis.ticks.x=element_blank())
+
+
+PC2<-z[ , c("V1", "X2","BP","V1.1")]
+names(PC2)<-c("SNP", "P","CHR","BP")
+ggplot(PC2,aes(x=SNP,y=-log10(P)))+geom_scattermore()+theme(axis.title.x=element_blank(),axis.text.x=element_blank(),axis.ticks.x=element_blank())+ggtitle("PC2")
+
+PC3<-z[ , c("V1", "X3","BP","V1.1")]
+names(PC3)<-c("SNP", "P","CHR","BP")
+ggplot(PC3,aes(x=SNP,y=-log10(P)))+geom_scattermore()+theme(axis.title.x=element_blank(),axis.text.x=element_blank(),axis.ticks.x=element_blank())+ggtitle("PC3")
+
+PC4<-z[ , c("V1", "X4","BP","V1.1")]
+names(PC4)<-c("SNP", "P","CHR","BP")
+ggplot(PC4,aes(x=SNP,y=-log10(P)))+geom_scattermore()+theme(axis.title.x=element_blank(),axis.text.x=element_blank(),axis.ticks.x=element_blank())+ggtitle("PC4")
+
+PC5<-z[ , c("V1", "X4","BP","V1.1")]
+names(PC5)<-c("SNP", "P","CHR","BP")
+ggplot(PC5,aes(x=SNP,y=-log10(P)))+geom_scattermore()+theme(axis.title.x=element_blank(),axis.text.x=element_blank(),axis.ticks.x=element_blank())+ggtitle("PC5")
+
+
+
+
+
+
+
+
+
+
+
 
 
 library(qqman)
