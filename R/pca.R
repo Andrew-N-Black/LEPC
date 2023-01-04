@@ -11,7 +11,7 @@ PC1_3<-as.data.frame(axes$vectors[,1:3])
 title1<-"Habitat"
 #title2<-"Species"
 
-ggplot(data=PC1_3, aes(y=V2, x=V1, shape=as.factor(metadata$SPECIES),color=as.factor(metadata$HABITAT)))+geom_point(size=2)+ theme_classic() + xlab("PC1 (3.72%)") +ylab("PC2 (1.06%)")+scale_color_manual(title1, values =c("Shinnery-Oak-Prairie"="bisque","Mixed-Grass-Prairie"="blue","Sand-Sagebrush-Prairie"="darkorchid1","Shortgrass-CRP-Mosaic"="darkolivegreen3"))+geom_hline(yintercept=0,linetype="dashed")+geom_vline(xintercept =0,linetype="dashed")+scale_shape_manual(title2,values=c(20,18))
+ggplot(data=PC1_3, aes(y=V2, x=V1, shape=as.factor(metadata$DPS),color=as.factor(metadata$HABITAT)))+geom_point(size=2)+ theme_classic() + xlab("PC1 (3.72%)") +ylab("PC2 (1.06%)")+scale_color_manual("Ecoregion", values =c("Shinnery-Oak"="bisque","Mixed-Grass"="blue","Sand-Sagebrush"="darkorchid1","Shortgrass-CRP-Mosaic"="darkolivegreen3"))+geom_hline(yintercept=0,linetype="dashed")+geom_vline(xintercept =0,linetype="dashed")+scale_shape_manual("DPS",values=c(20,17))
 
  
 #Policy
