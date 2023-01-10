@@ -10,6 +10,16 @@ ggplot(HET_FILT,aes(x=HABITAT,y=HET,fill=HABITAT))+geom_boxplot(show.legend =FAL
 ggsave("heterozygosity_habitat.svg")
 ggsave("heterozygosity_habitat.pdf")
 
+
+#Heterozygosity by time and DPS
+#Order year
+HET_FILT$Year <- ordered(HET_FILT$Year,levels = c("2008","2009","2010","2011","2013","2014","2015","2016","2017","2018","2019","2020","2021"))
+ggplot(HET_FILT,aes(x=Year,y=HET,fill=DPS))+geom_boxplot()+scale_fill_manual("DPS", values =c("Northern"="brown","Southern"="yellow"))+xlab("Year")+ylab("Individual Heterozygosity")+theme_classic()+ theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+facet_wrap(~DPS,ncol=1)+ylim(0.0018,0.0058)
+
+
+
+
+
 #Heterozygosity by LEK and Habitat
 
 ggplot(HET_FILT,aes(x=reorder(LEK,HET),y=HET,fill=HABITAT))+geom_boxplot(outlier.shape = NA)+scale_fill_manual(title, values =c("Shinnery-Oak-Prairie"="bisque","Mixed-Grass-Prairie"="blue","Sand-Sagebrush-Prairie"="darkorchid1","Shortgrass-CRP-Mosaic"="darkolivegreen3"))+xlab("Lek")+ylab("Individual Heterozygosity")+theme_classic()+ylim(0.0018,0.0058)+ theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
